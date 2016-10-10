@@ -36,7 +36,7 @@ function drawFaceBoundingBoxes() {
     detector.detect(photo)
       .then(faceDetectionResult => {
         console.log(faceDetectionResult);
-        for each (var boundingBox in faceDetectionResult) {
+        for (var boundingBox in faceDetectionResult) {
           ctx.rect(10+boundingBox.x, 10+boundingBox.y, boundingBox.width, boundingBox.height);
           ctx.stroke();
         }
