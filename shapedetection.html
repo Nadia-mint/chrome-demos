@@ -7,7 +7,8 @@
 
 <body>
   <div> This page contains an arbitrary image. </div>
-<!--<img id="photo" src="https://facedetection.com/wp-content/uploads/m01-32_gr.jpg"> -->
+  <button onclick="drawFaceBoundingBoxes()">Detect faces</button>
+  <br/>
   <img id="photo" src="https://skybiometry.com/wp-content/uploads/2015/09/work-2-1-e1451907791984.jpg">
   <img id="testing" src="http://www.refillinstructions.com/Purge/CTS-blue.jpg">
   <br/>
@@ -15,6 +16,19 @@
 
 <script type="text/javascript" src="dimsum.js"></script>
 <script>
+function drawFaceBoundingBoxes() {
+    var photo = document.getElementById("photo");
+    var detector = new FaceDetector();
+    detector.detect(photo)
+      .then(faceDetectionResult => {
+        console.log(faceDetectionResult);
+
+        alert(faceDetectionResult.length);
+      })
+      .catch(error => {
+        alert("Error during detect(photo): " + error);
+      });
+}
 
 
 </script>
