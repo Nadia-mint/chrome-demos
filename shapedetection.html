@@ -26,18 +26,24 @@
     position:relative;
     top:1px;
   }
+
+  canvas {
+    border:3px solid #d3d3d3;
+
+  }
 </style>
 </head>
 
 <body>
-  <input type="file" onchange="previewFile()" value="Select file for face detection:">
-  <br/>
+  <input type="file" onchange="previewFile()" value="Select file for face detection:"><br/>
+
   <img id="photo" src="https://skybiometry.com/wp-content/uploads/2015/09/work-2-1-e1451907791984.jpg">
+
   <p>Canvas:</p>
-  <canvas id="myCanvas" width="240" height="297" style="border:1px solid #d3d3d3;">
+  <canvas id="myCanvas" width="240" height="297">
   Your browser does not support the HTML5 canvas tag.
-  </canvas>
-  <br/>
+  </canvas><br/>
+
   <button class="myButton" onclick="drawFaceBoundingBoxes()">Click to get bounding boxes</button>
 
 </body>
@@ -47,25 +53,21 @@
   var c = document.getElementById("myCanvas");
   var ctx = c.getContext("2d");
   var boundingBoxList = [];
+  var img = document.getElementById("photo");
 
-  window.onload = drawImageOnCanvas("https://skybiometry.com/wp-content/uploads/2015/09/work-2-1-e1451907791984.jpg");
-
-  function drawImageOnCanvas(src) {
-      var img = new Image();
-      img.src = src;
-      c.width = img.naturalWidth + 20;
-      c.height = img.naturalHeight + 20;
-      ctx.drawImage(img, 10, 10);
+  function drawImageOnCanvas(image) {
+      c.width = image.naturalWidth + 20;
+      c.height = image.naturalHeight + 20;
+      ctx.drawImage(image, 10, 10);
   }
 
   function drawFaceBoundingBoxes() {
-      var photo = document.getElementById("photo");
       var detector = new FaceDetector();
-      detector.detect(photo)
+      detector.detect(img)
         .then(faceDetectionResult => {
           for (var i=0; i<faceDetectionResult.length; i++) {
             var boundingBox = faceDetectionResult[i];
-            ctx.lineWidth=6;
+            ctx.lineWidth=10;
             ctx.strokeStyle="red";
             ctx.rect(
               Math.floor(10+boundingBox.x),
@@ -78,25 +80,25 @@
           }
         })
         .catch(error => {
-          alert("Error during detect(photo): " + error);
+          alert("Error during detect(img): " + error);
         });
   }
 
    function previewFile(){
-       var preview = document.querySelector('img');
        var file    = document.querySelector('input[type=file]').files[0];
        var reader  = new FileReader();
 
        reader.onloadend = function () {
-           preview.src = reader.result;
-           drawImageOnCanvas(preview.src)
+           img.src = reader.result;
+           drawImageOnCanvas(img)
        }
 
-       if (file) {
+       if (file)
            reader.readAsDataURL(file);
-       } else {
-           preview.src = "https://skybiometry.com/wp-content/uploads/2015/09/work-2-1-e1451907791984.jpg";
-       }
+  }
+
+  window.onload = function() {
+    drawImageOnCanvas(img);
   }
 
 </script>
