@@ -46,7 +46,7 @@
 <script>
   var c = document.getElementById("myCanvas");
   var ctx = c.getContext("2d");
-  var detectedFaceList;
+  var boundingBoxList = [];
 
   window.onload = drawImageOnCanvas("https://skybiometry.com/wp-content/uploads/2015/09/work-2-1-e1451907791984.jpg");
 
@@ -72,7 +72,7 @@
               Math.floor(boundingBox.height)
             );
             ctx.stroke();
-          detectedFaceList.append(boundingBox);
+          boundingBoxList.append(boundingBox);
           }
         })
         .catch(error => {
