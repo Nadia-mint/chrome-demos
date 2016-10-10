@@ -65,7 +65,7 @@
         .then(faceDetectionResult => {
           for (var i=0; i<faceDetectionResult.length; i++) {
             var boundingBox = faceDetectionResult[i];
-            ctx.lineWidth=10;
+            ctx.lineWidth=6;
             ctx.strokeStyle="red";
             ctx.rect(
               Math.floor(10+boundingBox.x),
@@ -74,7 +74,7 @@
               Math.floor(boundingBox.height)
             );
             ctx.stroke();
-          boundingBoxList.append(boundingBox);
+            boundingBoxList.push(boundingBox);
           }
         })
         .catch(error => {
