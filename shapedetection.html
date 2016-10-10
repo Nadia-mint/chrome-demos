@@ -26,7 +26,6 @@
     position:relative;
     top:1px;
   }
-
   canvas {
     border:3px solid #d3d3d3;
 
@@ -37,7 +36,7 @@
 <body>
   <input type="file" onchange="previewFile()" value="Select file for face detection:"><br/>
 
-  <img id="photo" src="https://skybiometry.com/wp-content/uploads/2015/09/work-2-1-e1451907791984.jpg">
+  <img hidden id="photo" src="https://skybiometry.com/wp-content/uploads/2015/09/work-2-1-e1451907791984.jpg">
 
   <p>Canvas:</p>
   <canvas id="myCanvas" width="240" height="297">
@@ -62,26 +61,27 @@
   }
 
   function drawFaceBoundingBoxes() {
-      var detector = new FaceDetector();
-      detector.detect(img)
-        .then(faceDetectionResult => {
-          for (var i=0; i<faceDetectionResult.length; i++) {
-            var boundingBox = faceDetectionResult[i];
-            ctx.lineWidth=10;
-            ctx.strokeStyle="red";
-            ctx.rect(
-              Math.floor(10+boundingBox.x),
-              Math.floor(10+boundingBox.y),
-              Math.floor(boundingBox.width),
-              Math.floor(boundingBox.height)
-            );
-            ctx.stroke();
-            boundingBoxList.push(boundingBox);
-          }
-        })
-        .catch(error => {
-          alert("Error during detect(img): " + error);
-        });
+    console.log(img);
+    var detector = new FaceDetector();
+    detector.detect(img)
+      .then(faceDetectionResult => {
+        for (var i=0; i<faceDetectionResult.length; i++) {
+          var boundingBox = faceDetectionResult[i];
+          ctx.lineWidth=10;
+          ctx.strokeStyle="red";
+          ctx.rect(
+            Math.floor(10+boundingBox.x),
+            Math.floor(10+boundingBox.y),
+            Math.floor(boundingBox.width),
+            Math.floor(boundingBox.height)
+          );
+          ctx.stroke();
+          boundingBoxList.push(boundingBox);
+        }
+      })
+      .catch(error => {
+        alert("Error during detect(img): " + error);
+      });
   }
 
    function previewFile(){
