@@ -88,6 +88,7 @@
 
    function previewFile(){
        var file    = document.querySelector('input[type=file]').files[0];
+       console.log(file);
        var reader  = new FileReader();
 
        reader.onloadend = function () {
