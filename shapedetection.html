@@ -4,13 +4,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Shape Detection Demo</title>
 <style>
+  .center {
+    margin: auto;
+    display: block;
+  }
   .myButton {
     background-color:#44c767;
     -moz-border-radius:7px;
     -webkit-border-radius:7px;
     border-radius:7px;
     border:1px solid #18ab29;
-    display:inline-block;
     cursor:pointer;
     color:#ffffff;
     font-family:Arial;
@@ -28,35 +31,34 @@
   }
   canvas {
     border:3px solid #d3d3d3;
-
+    width:66%;
   }
 </style>
 </head>
 
 <body>
-  <input type="file" onchange="previewFile()" value="Select file for face detection:"><br/>
+  <input  class="center" type="file" onchange="previewFile()" value="Select file for face detection:" ><br/>
 
-  <img hidden id="photo" src="https://skybiometry.com/wp-content/uploads/2015/09/work-2-1-e1451907791984.jpg">
+  <img hidden id="myImage" src="https://skybiometry.com/wp-content/uploads/2015/09/work-2-1-e1451907791984.jpg">
 
-  <p>Canvas:</p>
-  <canvas id="myCanvas" width="240" height="297">
+  <canvas id="myCanvas"  class="center">
   Your browser does not support the HTML5 canvas tag.
   </canvas><br/>
 
-  <button class="myButton" onclick="drawFaceBoundingBoxes()">Click to get bounding boxes</button>
+  <button class="myButton center" onclick="drawFaceBoundingBoxes()">Click to get bounding boxes</button>
 
 </body>
 
-<script type="text/javascript" src="dimsum.js"></script>
 <script>
   var c = document.getElementById("myCanvas");
   var ctx = c.getContext("2d");
   var boundingBoxList = [];
-  var img = document.getElementById("photo");
+  var img = document.getElementById("myImage");
+
 
   function drawImageOnCanvas(image) {
-      c.width = image.naturalWidth + 20;
-      c.height = image.naturalHeight + 20;
+      c.width = image.width + 20;
+      c.height = image.height + 20;
       ctx.drawImage(image, 10, 10);
   }
 
