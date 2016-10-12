@@ -37,7 +37,7 @@
 </head>
 
 <body>
-  <input class="center" type="file" onchange="handleUpload()"><br/>
+  <input id="imageLoader" class="center" type="file""><br/>
 
   <img hidden id="myImage" src="https://skybiometry.com/wp-content/uploads/2015/09/work-2-1-e1451907791984.jpg">
 
@@ -84,28 +84,44 @@
       });
   }
 
-  function handleUpload(e){
-    var files = document.querySelector('input[type=file]').files;
-    if(files.length==0){
-      console.log("length==0");
-      return;
-    }
+var imageLoader = document.getElementById('imageLoader');
+    imageLoader.addEventListener('change', handleImage, false);
 
-    file = files[0];
-    console.log(file);
+function handleImage(e){
     var reader = new FileReader();
-    reader.onloadend = function () {
-      img.src = reader.result;
-      // drawImageOnCanvas(img)
+    reader.onload = function(event){
+        var img = new Image();
+        img.onload = function(){
+          drawImageOnCanvas(img);
+        }
+        img.src = event.target.result;
     }
+    reader.readAsDataURL(e.target.files[0]);
+}
 
-    if (file)
-      reader.readAsDataURL(file);
-  }
+  // function handleUpload(e){
+  //   console.log("handleUpload");
+  //   var files = document.querySelector('input[type=file]').files;
+  //   if(files.length==0){
+  //     console.log("length==0");
+  //     return;
+  //   }
 
-  window.onload = function() {
-    drawImageOnCanvas(img);
-  }
+  //   file = files[0];
+  //   console.log(file);
+  //   var reader = new FileReader();
+  //   reader.onloadend = function () {
+  //     img.src = reader.result;
+  //     // drawImageOnCanvas(img)
+  //   }
+
+  //   if (file)
+  //     reader.readAsDataURL(file);
+  // }
+
+  // window.onload = function() {
+  //   drawImageOnCanvas(img);
+  // }
 
 </script>
 </html>
