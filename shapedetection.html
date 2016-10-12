@@ -88,23 +88,13 @@
     var file = document.querySelector('input[type=file]').files[0];
     console.log(file);
     var reader = new FileReader();
-    reader.onload = function(event){
-      img.onload = function(){
-        drawImageOnCanvas(img);
-      }
-      img.src = event.target.result;
+    reader.onloadend = function () {
+      img.src = reader.result;
+      // drawImageOnCanvas(img)
     }
-    reader.readAsDataURL(file);
 
-    // var reader = new FileReader();
-
-    // reader.onloadend = function () {
-    //   img.src = reader.result;
-    //   drawImageOnCanvas(img)
-    // }
-
-    // if (file)
-    //   reader.readAsDataURL(file);
+    if (file)
+      reader.readAsDataURL(file);
   }
 
   window.onload = function() {
