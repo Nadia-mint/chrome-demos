@@ -85,7 +85,13 @@
   }
 
   function handleUpload(e){
-    var file = document.querySelector('input[type=file]').files[0];
+    var files = document.querySelector('input[type=file]').files;
+    if(files.length==0){
+      console.log("length==0");
+      return;
+    }
+
+    file = files[0];
     console.log(file);
     var reader = new FileReader();
     reader.onloadend = function () {
