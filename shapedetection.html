@@ -91,13 +91,13 @@
     console.log(file);
     var reader = new FileReader();
 
-    reader.onloadend = function () {
-      img.src = reader.result;
-      drawImageOnCanvas(img)
-    }
+    // reader.onloadend = function () {
+    img.src = reader.result;
+    // }
 
     if (file)
       reader.readAsDataURL(file);
+    drawImageOnCanvas(img)
   }
 
   window.onload = function() {
