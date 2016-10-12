@@ -88,6 +88,7 @@ var imageLoader = document.getElementById('imageLoader');
     imageLoader.addEventListener('change', handleImage, false);
 
 function handleImage(e){
+  console.log("handleImage");
     var reader = new FileReader();
     reader.onload = function(event){
         var img = new Image();
@@ -119,9 +120,9 @@ function handleImage(e){
   //     reader.readAsDataURL(file);
   // }
 
-  // window.onload = function() {
-  //   drawImageOnCanvas(img);
-  // }
+  window.onload = function() {
+    drawImageOnCanvas(img);
+  }
 
 </script>
 </html>
