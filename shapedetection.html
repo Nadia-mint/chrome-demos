@@ -54,34 +54,36 @@
   var ctx = c.getContext("2d");
   var img = document.getElementById("myImage");
 
-
-  function drawImageOnCanvas(image) {
-      c.width = image.width + 20;
-      c.height = image.height + 20;
-      ctx.drawImage(image, 10, 10);
+  function drawBoundingBoxOnCanvas(boundingBox) {
+    ctx.lineWidth=10;
+    ctx.strokeStyle="red";
+    ctx.rect(
+      Math.floor(10+boundingBox.x),
+      Math.floor(10+boundingBox.y),
+      Math.floor(boundingBox.width),
+      Math.floor(boundingBox.height)
+    );
+    ctx.stroke();
   }
 
   function drawFaceBoundingBoxes() {
-    console.log(img);
     var detector = new FaceDetector();
     detector.detect(img)
       .then(faceDetectionResult => {
         for (var i=0; i<faceDetectionResult.length; i++) {
           var boundingBox = faceDetectionResult[i];
-          ctx.lineWidth=10;
-          ctx.strokeStyle="red";
-          ctx.rect(
-            Math.floor(10+boundingBox.x),
-            Math.floor(10+boundingBox.y),
-            Math.floor(boundingBox.width),
-            Math.floor(boundingBox.height)
-          );
-          ctx.stroke();
+          drawBoundingBoxOnCanvas(boundingBox);
         }
       })
       .catch(error => {
         alert(error);
       });
+  }
+
+  function drawImageOnCanvas(image) {
+      c.width = image.width + 20;
+      c.height = image.height + 20;
+      ctx.drawImage(image, 10, 10);
   }
 
 var imageLoader = document.getElementById('imageLoader');
