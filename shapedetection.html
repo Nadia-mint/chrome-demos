@@ -72,6 +72,7 @@
       .then(faceDetectionResult => {
         for (var i=0; i<faceDetectionResult.length; i++) {
           var boundingBox = faceDetectionResult[i];
+          console.log(boundingBox.x + "," + boundingBox.y + "," + boundingBox.width + "," + boundingBox.height);
           drawBoundingBoxOnCanvas(boundingBox);
         }
       })
