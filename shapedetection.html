@@ -38,8 +38,6 @@
 
 <body>
   <input id="imageLoader" class="center" type="file""><br/>
-  <img id="testing" src="http://www.refillinstructions.com/Purge/CTS-blue.jpg">
-  <img id="img" src="https://skybiometry.com/wp-content/uploads/2015/09/work-2-1-e1451907791984.jpg">
   <img hidden id="myImage" src="single_face.jpg">
 
   <canvas id="myCanvas"  class="center">
@@ -92,7 +90,6 @@ var imageLoader = document.getElementById('imageLoader');
     imageLoader.addEventListener('change', handleImage, false);
 
 function handleImage(e){
-  console.log("If crashes after selecting file, see ");
     var reader = new FileReader();
     reader.onload = function(event){
         var img = new Image();
@@ -100,6 +97,7 @@ function handleImage(e){
           drawImageOnCanvas(img);
         }
         img.src = event.target.result;
+        console.log("new img.src="+img.src);
     }
     reader.readAsDataURL(e.target.files[0]);
 }
