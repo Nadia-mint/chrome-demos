@@ -70,7 +70,7 @@
     detector.detect(img)
       .then(faceDetectionResult => {
         for (var i=0; i<faceDetectionResult.length; i++) {
-          var boundingBox = faceDetectionResult[i];
+          var boundingBox = faceDetectionResult[i].boundingBox;
           console.log(boundingBox.x + "," + boundingBox.y + "," + boundingBox.width + "," + boundingBox.height);
           drawBoundingBoxOnCanvas(boundingBox);
         }
